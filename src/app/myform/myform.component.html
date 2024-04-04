@@ -1,0 +1,28 @@
+<form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
+  <div formArrayName="courses">
+    <div *ngFor="let course of courses.controls; let i = index">
+      <div [formGroupName]="i">
+        <h2>{{ 'Курс ' + (i + 1) }}</h2>
+        <div formArrayName="groups">
+          <div *ngFor="let group of getCourseGroups(i)?.controls; let j = index">
+            <div [formGroupName]="j">
+              <ion-item>
+                <ion-label position="floating">Назва групи</ion-label>
+                <ion-input type="text" formControlName="name"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Кількість студентів</ion-label>
+                <ion-input type="number" formControlName="number_students"></ion-input>
+              </ion-item>
+              <ion-button (click)="removeGroup(i, j)" color="danger" size="small">Видалити групу</ion-button>
+            </div>
+          </div>
+        </div>
+        <ion-button (click)="addGroup(i)" expand="block" fill="outline" color="success">Додати групу</ion-button>
+      </div>
+    </div>
+  </div>
+  <ion-button type="submit" expand="block" color="primary">Submit</ion-button>
+</form>
+
+

@@ -1,0 +1,25 @@
+<app-myform (formDataSubmitted)="addData($event)">
+</app-myform>
+
+<ng-container *ngIf="coursesData.length > 0; else noData">
+  <h2>Виведення інформації про курси та групи:</h2>
+  <div *ngFor="let course of coursesData; let i = index">
+    <h3>Курс {{ i + 1 }}</h3>
+    <div *ngFor="let group of course.groups; let j = index">
+      <div>
+        <strong>Назва групи:</strong> {{ group.name }}<br>
+        <strong>Кількість студентів:</strong> {{ group.number_students }}
+      </div>
+    </div>
+    
+    <ion-item>{{ getStudentInfo(i) }}</ion-item>
+
+  </div>
+</ng-container>
+
+  
+<ng-template #noData>
+  <p>Немає даних для відображення</p>
+</ng-template>
+
+
